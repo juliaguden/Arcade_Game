@@ -14,6 +14,7 @@
 //Graphics Libraries
 import java.awt.Graphics2D;
 import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.awt.image.BufferStrategy;
 import java.awt.*;
 import javax.swing.JFrame;
@@ -23,7 +24,7 @@ import javax.swing.JPanel;
 //*******************************************************************************
 // Class Definition Section
 
-public class BasicGameApp implements Runnable {
+public class BasicGameApp implements Runnable, KeyListener {
 
    //Variable Definition Section
    //Declare the variables used in the program 
@@ -41,11 +42,14 @@ public class BasicGameApp implements Runnable {
 	public BufferStrategy bufferStrategy;
 	public Image backroundpic;
 	public Image duckPic;
+	public Image frogPic;
+
+	public Frog [] fFrog;
 
    //Declare the objects used in the program
    //These are things that are made up of more than one variable type
 	private Duck duck1;
-
+	private Frog frog1;
 
    // Main method definition
    // This is the code that runs first and automatically
@@ -67,9 +71,13 @@ public class BasicGameApp implements Runnable {
       //create (construct) the objects needed for the game and load up
 		backroundpic = Toolkit.getDefaultToolkit().getImage("PondPic.jpeg");
 		duckPic = Toolkit.getDefaultToolkit().getImage("DuckPic.png"); //load the picture
+		frogPic = Toolkit.getDefaultToolkit().getImage("FROG.png");
 		duck1 = new Duck (300,400);
-
-
+		frog1 = new Frog (200,600);
+		fFrog = new Frog[50];
+		for(int i=0; i < fFrog.length; i++){
+			fFrog[i]=new Frog ((int)(Math.random()*500),(int)(Math.random()*400));
+		}
 	}// BasicGameApp()
 
    
@@ -92,15 +100,17 @@ public class BasicGameApp implements Runnable {
 	}
 
 
-	public void moveThings()
-	{
-      //calls the move( ) code in the objects
+	public void moveThings() {
+		//calls the move( ) code in the objects
 		duck1.move();
-
+		frog1.move();
+		for (int i = 0; i < fFrog.length; i++) {
+			fFrog[i].move();
+		}
 	}
 	
    //Pauses or sleeps the computer for the amount specified in milliseconds
-   public void pause(int time ){
+   public void pause(int time){
    		//sleep
 			try {
 				Thread.sleep(time);
@@ -122,6 +132,7 @@ public class BasicGameApp implements Runnable {
       canvas = new Canvas();  
       canvas.setBounds(0, 0, WIDTH, HEIGHT);
       canvas.setIgnoreRepaint(true);
+	  canvas.addKeyListener(this);
    
       panel.add(canvas);  // adds the canvas to the panel.
    
@@ -148,6 +159,7 @@ public class BasicGameApp implements Runnable {
       //draw the image of the astronaut
 		g.drawImage(backroundpic, 0, 0, 1000, 700, null);
 		g.drawImage(duckPic, duck1.xpos, duck1.ypos,duck1.width,duck1.height, null);
+		g.drawImage(frogPic, frog1.xpos, frog1.ypos, frog1.width, frog1.height, null);
 		g.dispose();
 
 		bufferStrategy.show();
@@ -155,7 +167,7 @@ public class BasicGameApp implements Runnable {
 
 	public void keyTyped(KeyEvent e) {
 	}
-	
+
 	public void keyPressed (KeyEvent e) {
 		if (e.getKeyCode() == 39) {
 			duck1.dx = 5;
