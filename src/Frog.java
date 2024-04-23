@@ -1,12 +1,5 @@
-import java.awt.*;
+public class Frog {
 
-/**
- * Created by chales on 11/6/2017.
- */
-public class Duck {
-
-    //VARIABLE DECLARATION SECTION
-    //Here's where you state which variables you are going to use.
     public String name;                //holds the name of the hero
     public int xpos;                //the x position
     public int ypos;                //the y position
@@ -25,7 +18,7 @@ public class Duck {
 
     //This is a SECOND constructor that takes 3 parameters.  This allows us to specify the hero's name and position when we build it.
     // if you put in a String, an int and an int the program will use this constructor instead of the one above.
-    public Duck(int pXpos, int pYpos) {
+    public Frog(int pXpos, int pYpos) {
         xpos = pXpos;
         ypos = pYpos;
         dx =1;
@@ -33,7 +26,7 @@ public class Duck {
         width = 100;
         height = 100;
         isAlive = true;
- 
+
     } // constructor
 
     //The move method.  Everytime this is run (or "called") the hero's x position and y position change by dx and dy
@@ -43,9 +36,4 @@ public class Duck {
 
     }
 }
-
-
-
-
-
 
