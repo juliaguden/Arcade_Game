@@ -94,6 +94,7 @@ public class BasicGameApp implements Runnable, KeyListener {
 		while (true) {
 
          moveThings();  //move all the game objects
+			 checkIntersections();
          render();  // paint the graphics
          pause(20); // sleep for 10 ms
 		}
@@ -108,7 +109,17 @@ public class BasicGameApp implements Runnable, KeyListener {
 			fFrog[i].move();
 		}
 	}
-	
+	public void checkIntersections(){
+		if(fFrog.rec.intersects(duck1.rec)){
+			//WRITE SOMETHING HERE
+			frog1.isAlive=false;
+			//System.out.println("INTERSECTED");
+			System.out.println(score);
+			score=score+ 1;
+
+		}
+	}
+
    //Pauses or sleeps the computer for the amount specified in milliseconds
    public void pause(int time){
    		//sleep
@@ -161,6 +172,9 @@ public class BasicGameApp implements Runnable, KeyListener {
 		g.drawImage(duckPic, duck1.xpos, duck1.ypos,duck1.width,duck1.height, null);
 		g.drawImage(frogPic, frog1.xpos, frog1.ypos, frog1.width, frog1.height, null);
 		g.dispose();
+		for(int i=0; i< fFrog.length; i++){
+			g.drawImage(frogPic,fFrog[i].xpos,fFrog[i].ypos, fFrog[i].width, fFrog[i].height, null);
+		}
 
 		bufferStrategy.show();
 	}
