@@ -43,7 +43,7 @@ public class BasicGameApp implements Runnable, KeyListener {
 	public Image backroundpic;
 	public Image duckPic;
 	public Image frogPic;
-
+	public int score = 0;
 	public Frog [] fFrog;
 
    //Declare the objects used in the program
@@ -175,7 +175,13 @@ public class BasicGameApp implements Runnable, KeyListener {
 		for(int i=0; i< fFrog.length; i++){
 			g.drawImage(frogPic,fFrog[i].xpos,fFrog[i].ypos, fFrog[i].width, fFrog[i].height, null);
 		}
-
+		g.setColor(Color.white);
+		g.drawRect(10,10,200,100);
+		g.fillRect(10,10,200,100);
+		g.setColor(Color.black);
+		g.drawString("scoreboard"+ score,100,100);
+		System.out.println(score);
+		g.dispose();
 		bufferStrategy.show();
 	}
 
