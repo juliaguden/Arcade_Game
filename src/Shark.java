@@ -30,13 +30,21 @@ public class Shark {
             width = 100;
             height = 100;
             isAlive = true;
-
+            rec = new Rectangle(xpos, ypos, width, height);
         } // constructor
 
         //The move method.  Everytime this is run (or "called") the hero's x position and y position change by dx and dy
         public void move() {
             xpos = xpos + dx;
             ypos = ypos + dy;
+            if (xpos >= 965) {
+                dx = -5;
 
+            }
+            if (xpos <= 0) {
+                dx = 5;
+                width = width + 10;
+                height = height + 10;
+            rec = new Rectangle(xpos, ypos, width, height);
         }
 }
