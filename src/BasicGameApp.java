@@ -43,6 +43,7 @@ public class BasicGameApp implements Runnable, KeyListener {
 	public Image backroundpic;
 	public Image duckPic;
 	public Image frogPic;
+	public Image sharkPic;
 	public int score = 0;
 	public Frog [] fFrog;
 
@@ -50,6 +51,7 @@ public class BasicGameApp implements Runnable, KeyListener {
    //These are things that are made up of more than one variable type
 	private Duck duck1;
 	private Frog frog1;
+	private Shark shark1;
 
    // Main method definition
    // This is the code that runs first and automatically
@@ -72,8 +74,10 @@ public class BasicGameApp implements Runnable, KeyListener {
 		backroundpic = Toolkit.getDefaultToolkit().getImage("PondPic.jpeg");
 		duckPic = Toolkit.getDefaultToolkit().getImage("DuckPic.png"); //load the picture
 		frogPic = Toolkit.getDefaultToolkit().getImage("FROG.png");
+		sharkPic = Toolkit.getDefaultToolkit().getImage("Shark.png");
 		duck1 = new Duck (300,400);
 		frog1 = new Frog (200,600);
+		shark1 = new Shark(100, 400);
 		fFrog = new Frog[50];
 		for(int i=0; i < fFrog.length; i++){
 			fFrog[i]=new Frog ((int)(Math.random()*500),(int)(Math.random()*400));
@@ -104,6 +108,7 @@ public class BasicGameApp implements Runnable, KeyListener {
 	public void moveThings() {
 		//calls the move( ) code in the objects
 		duck1.move();
+		shark1.move();
 		frog1.move();
 		for (int i = 0; i < fFrog.length; i++) {
 			fFrog[i].move();
@@ -171,6 +176,7 @@ public class BasicGameApp implements Runnable, KeyListener {
 		g.drawImage(backroundpic, 0, 0, 1000, 700, null);
 		g.drawImage(duckPic, duck1.xpos, duck1.ypos,duck1.width,duck1.height, null);
 		g.drawImage(frogPic, frog1.xpos, frog1.ypos, frog1.width, frog1.height, null);
+		g.drawImage(sharkPic, duck1.xpos, duck1.ypos,duck1.width,duck1.height, null);
 		g.dispose();
 		for(int i=0; i< fFrog.length; i++){
 			g.drawImage(frogPic,fFrog[i].xpos,fFrog[i].ypos, fFrog[i].width, fFrog[i].height, null);
