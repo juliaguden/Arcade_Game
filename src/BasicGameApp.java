@@ -98,7 +98,7 @@ public class BasicGameApp implements Runnable, KeyListener {
 		while (true) {
 
          moveThings();  //move all the game objects
-			 checkIntersections();
+			checkIntersections();
          render();  // paint the graphics
          pause(20); // sleep for 10 ms
 		}
@@ -115,7 +115,7 @@ public class BasicGameApp implements Runnable, KeyListener {
 		}
 	}
 	public void checkIntersections(){
-		if(fFrog.rec.intersects(duck1.rec)){
+		if(frog1.rec.intersects(duck1.rec)){
 			//WRITE SOMETHING HERE
 			frog1.isAlive=false;
 			//System.out.println("INTERSECTED");
@@ -172,11 +172,13 @@ public class BasicGameApp implements Runnable, KeyListener {
 		Graphics2D g = (Graphics2D) bufferStrategy.getDrawGraphics();
 		g.clearRect(0, 0, WIDTH, HEIGHT);
 
+
+
       //draw the image of the astronaut
 		g.drawImage(backroundpic, 0, 0, 1000, 700, null);
 		g.drawImage(duckPic, duck1.xpos, duck1.ypos,duck1.width,duck1.height, null);
 		g.drawImage(frogPic, frog1.xpos, frog1.ypos, frog1.width, frog1.height, null);
-		g.drawImage(sharkPic, duck1.xpos, duck1.ypos,duck1.width,duck1.height, null);
+		g.drawImage(sharkPic, shark1.xpos, shark1.ypos,shark1.width,shark1.height, null);
 		g.dispose();
 		for(int i=0; i< fFrog.length; i++){
 			g.drawImage(frogPic,fFrog[i].xpos,fFrog[i].ypos, fFrog[i].width, fFrog[i].height, null);
