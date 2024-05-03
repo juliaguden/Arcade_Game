@@ -43,8 +43,6 @@ public class Frog {
         }
         if (xpos <= 0) {
             dx = 5;
-            width = width + 10;
-            height = height + 10;
             rec = new Rectangle(xpos, ypos, width, height);
         }
     }
