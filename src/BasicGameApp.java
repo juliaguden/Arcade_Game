@@ -44,6 +44,7 @@ public class BasicGameApp implements Runnable, KeyListener {
 	public Image duckPic;
 	public Image frogPic;
 	public Image sharkPic;
+	public Image GameOverPic;
 	public int score = 0;
 	public Frog [] fFrog;
 
@@ -75,10 +76,11 @@ public class BasicGameApp implements Runnable, KeyListener {
 		duckPic = Toolkit.getDefaultToolkit().getImage("DuckPic.png"); //load the picture
 		frogPic = Toolkit.getDefaultToolkit().getImage("FROG.png");
 		sharkPic = Toolkit.getDefaultToolkit().getImage("Shark.png");
+		GameOverPic = Toolkit.getDefaultToolkit().getImage("GameOver.jpeg");
 		duck1 = new Duck (300,400);
 		frog1 = new Frog (200,600);
 		shark1 = new Shark(100, 400);
-		fFrog = new Frog[50];
+		fFrog = new Frog[12];
 		for(int i=0; i < fFrog.length; i++){
 			fFrog[i]=new Frog ((int)(Math.random()*500),(int)(Math.random()*400));
 		}
@@ -112,6 +114,10 @@ public class BasicGameApp implements Runnable, KeyListener {
 		frog1.move();
 		for (int i = 0; i < fFrog.length; i++) {
 			fFrog[i].move();
+			if (fFrog[i].rec.intersects(duck1.rec)){
+				System.out.print("+1");
+				fFrog[i].isAlive= false;
+			}
 		}
 	}
 	public void checkIntersections(){
@@ -122,6 +128,9 @@ public class BasicGameApp implements Runnable, KeyListener {
 			System.out.println(score);
 			score=score+ 1;
 
+		}
+		if(duck1.rec.intersects(shark1.rec)){
+			duck1.isAlive=false;
 		}
 	}
 
@@ -172,23 +181,31 @@ public class BasicGameApp implements Runnable, KeyListener {
 		Graphics2D g = (Graphics2D) bufferStrategy.getDrawGraphics();
 		g.clearRect(0, 0, WIDTH, HEIGHT);
 
+		if(duck1.isAlive == false){
+			g.drawImage(GameOverPic, 0,0,1000,700,null);
+		}else {
+
+			//draw the image of the astronaut
+			g.drawImage(backroundpic, 0, 0, 1000, 700, null);
+			g.drawImage(duckPic, duck1.xpos, duck1.ypos, duck1.width, duck1.height, null);
+			//g.drawImage(frogPic, frog1.xpos, frog1.ypos, frog1.width, frog1.height, null);
+			g.drawImage(sharkPic, shark1.xpos, shark1.ypos, shark1.width, shark1.height, null);
+			for (int i = 0; i < fFrog.length; i++) {
+				if (fFrog[i].isAlive == true) {
+					g.drawImage(frogPic, fFrog[i].xpos, fFrog[i].ypos, fFrog[i].width, fFrog[i].height, null);
+				}
+			}
 
 
-      //draw the image of the astronaut
-		g.drawImage(backroundpic, 0, 0, 1000, 700, null);
-		g.drawImage(duckPic, duck1.xpos, duck1.ypos,duck1.width,duck1.height, null);
-		g.drawImage(frogPic, frog1.xpos, frog1.ypos, frog1.width, frog1.height, null);
-		g.drawImage(sharkPic, shark1.xpos, shark1.ypos,shark1.width,shark1.height, null);
-		g.dispose();
-		for(int i=0; i< fFrog.length; i++){
-			g.drawImage(frogPic,fFrog[i].xpos,fFrog[i].ypos, fFrog[i].width, fFrog[i].height, null);
+			g.setColor(Color.white);
+			g.drawRect(10, 10, 200, 100);
+			g.fillRect(10, 10, 200, 100);
+			g.setColor(Color.black);
+			g.drawString("scoreboard " + score, 100, 100);
+			System.out.println(score);
 		}
-		g.setColor(Color.white);
-		g.drawRect(10,10,200,100);
-		g.fillRect(10,10,200,100);
-		g.setColor(Color.black);
-		g.drawString("scoreboard"+ score,100,100);
-		System.out.println(score);
+
+
 		g.dispose();
 		bufferStrategy.show();
 	}

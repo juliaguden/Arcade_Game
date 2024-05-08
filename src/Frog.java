@@ -27,8 +27,8 @@ public class Frog {
         ypos = pYpos;
         dx = 1;
         dy = 0;
-        width = 100;
-        height = 100;
+        width = 70;
+        height = 70;
         isAlive = true;
         rec = new Rectangle(xpos, ypos, width, height);
     } // constructor
@@ -43,8 +43,9 @@ public class Frog {
         }
         if (xpos <= 0) {
             dx = 5;
-            rec = new Rectangle(xpos, ypos, width, height);
         }
+        rec = new Rectangle(xpos, ypos, width, height);
+
     }
 }
 
